@@ -4,6 +4,9 @@ namespace Donato\Generic\HWIOAuthProxyBundle\Buzz\Client;
 
 use Buzz\Client\Curl;
 use Buzz\Message\MessageInterface;
+use Buzz\Message\RequestInterface;
+use Buzz\Exception\ClientException;
+use Buzz\Exception\LogicException;
 
 class CurlProxy extends Curl
 {
