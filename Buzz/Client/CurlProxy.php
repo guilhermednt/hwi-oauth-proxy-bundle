@@ -3,7 +3,7 @@
 namespace Donato\Generic\HWIOAuthProxyBundle\Buzz\Client;
 
 use Buzz\Client\Curl;
-
+use Buzz\Message\MessageInterface;
 
 class CurlProxy extends Curl
 {
