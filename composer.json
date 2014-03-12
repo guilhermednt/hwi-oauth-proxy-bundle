@@ -1,0 +1,22 @@
+{
+    "name": "guilhermednt/hwi-oauth-proxy-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle to enable proxy for HWIOAuthBundle",
+    "keywords": ["HWIOAuthBundle", "service", "proxy", "http"],
+    "homepage": "http://github.com/guilhermednt/hwi-oauth-proxy-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guilherme Donato",
+            "email": "packagist@cadastro.dona.to"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "guzzle/guzzle": ">=3.7.0"
+    },
+    "autoload": {
+        "psr-0": { "Donato\\Generic\\HWIOAuthProxyBundle": "" }
+    },
+    "target-dir": "Donato/Generic/HWIOAuthProxyBundle"
+}

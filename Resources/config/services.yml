@@ -1,0 +1,7 @@
+parameters:
+    buzz.client.class: Donato\Generic\HWIOAuthProxyBundle\Buzz\Client\CurlProxy
+
+services:
+    buzz.client:
+        class: %buzz.client.class%
+        public: false
