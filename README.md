@@ -1,9 +1,7 @@
-http-service-bundle
-===================
+hwi-oauth-proxy-bundle
+======================
 
-Currently, this bundle turns Guzzle HTTP Client into a service to allow application wide configuration (like curl proxy settings).
-
-It uses a `ClientFactory` so that you can adapt it to other HTTP Clients.
+This bundle extends HWIOAuthBundle to be able to extend the Curl client from Buzz.
 
 ## Installation
 
@@ -14,7 +12,7 @@ Add the bundle to your `composer.json`:
 ``` js
 {
     "require": {
-        "guilhermednt/http-service-bundle": "dev-master"
+        "guilhermednt/hwi-oauth-proxy-bundle": "dev-master"
     }
 }
 ```
@@ -22,7 +20,7 @@ Add the bundle to your `composer.json`:
 Then run the update command:
 
 ``` bash
-$ composer update guilhermednt/http-service-bundle
+$ composer update guilhermednt/hwi-oauth-proxy-bundle
 ```
 
 ### Step 2: Tell Symfony2 about it.
@@ -37,7 +35,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Donato\HttpServiceBundle\DonatoHttpServiceBundle(),
+        new Donato\Generic\HWIOAuthProxyBundle\DonatoGenericHWIOAuthProxyBundle(),
     );
 }
 ```
@@ -52,8 +50,7 @@ The minimum configuration needed is this:
 # app/config/parameters.yml
 
 parameters:
-    http_client_factory_class: Donato\HttpServiceBundle\Factory\ClientFactory
-    http_client_config: ~
+    http_proxy: ~
 ```
 
 Below you can see an **example** for *HTTP Proxy with Authentication*:
@@ -66,42 +63,14 @@ imports:
 
 parameters:
     # ... your regular parameters ...
-    
-    http_client_factory_class: Donato\HttpServiceBundle\Factory\ClientFactory
-    http_client_config:
-        curl:
-            %curl.proxy.type%: HTTP
-            %curl.proxy.host%: my.proxy.example.com
-            %curl.proxy.port%: 1234
-            %curl.proxy.auth%: username:password
-```
 
-**Note** that the CURL constants are introduced via **constants.php** as follows:
-
-``` php
-<?php
-// app/config/constants.php
-
-$container->setParameter('curl.proxy.type', CURLOPT_PROXYTYPE);
-$container->setParameter('curl.proxy.host', CURLOPT_PROXY);
-$container->setParameter('curl.proxy.port', CURLOPT_PROXYPORT);
-$container->setParameter('curl.proxy.auth', CURLOPT_PROXYUSERPWD);
+    http_proxy:
+        type: HTTP
+        host: my.proxy.example.com
+        port: 1234
+        auth: username:password
 ```
 
 ### That's it!
 
-Now you can start using the service named `http_client_factory`. To instantiate a `Guzzle\Http\Client` you may just do the following:
-
-``` php
-<?php
-// SomeController.php
-    public function someAction()
-    {
-        // ...
-        
-        $clientFactory = $this->get('http_client_factory');
-        $client = $clientFactory->getGuzzleClient();
-        
-        // ...
-    }
-```
+Now you can use `HWIOAuthBundle` normally and it will work behind your proxy!
